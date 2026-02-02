@@ -3,13 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>감사 편지</title>
+<title>선생님께</title>
 
 <style>
   body {
     margin: 0;
     background: #111;
-    /* 종이 느낌 배경 */
     background-image:
       repeating-linear-gradient(
         0deg,
@@ -40,7 +39,7 @@
     transition: opacity 0.8s ease, transform 0.8s ease;
   }
 
-  /* PC에서는 애니메이션 빠르게 */
+  
   @media (pointer: fine) {
     .line {
       transition: opacity 0.3s ease, transform 0.3s ease;
@@ -52,7 +51,7 @@
     transform: translateY(0);
   }
 
-  /* 호흡 효과 */
+  
   .breath {
     animation: breathe 1.2s ease-out;
   }
@@ -62,7 +61,7 @@
     to   { opacity: 1; }
   }
 
-  /* 서명 */
+  
   .sign {
     margin-top: 32px;
     font-size: 16px;
@@ -73,21 +72,26 @@
 
 <body>
 
-<div id="hint">화면을 터치하면 시작됩니다</div>
+<div id="hint">화면을 터치해주세요</div>
 <div id="container"></div>
 
 <script>
 const lines = [
-  "안녕하세요, 선생님.",
+  "최윤정 선생님께.",
   "",
-  "항상 한결같이 지도해 주셔서",
-  "진심으로 감사드립니다.",
+  "안녕하세요 선생님, 제자 이인후입니다",
+  "생신 축하와 감사인사를 드리기위해.",
+  "조심스럽게 연락드립니다",
   "",
-  "선생님 덕분에",
-  "많이 배우고 성장할 수 있었습니다.",
+  "제가 고등학교 1학년 입학부터 지금까지 3년간",
+  "수많은 일들이 있었고, 선생님께서는 제게 말로 다할 수 없는 것들을.",
+  "멘토로서, 존경스러운 어른으로서 많은 가르침을 주셨습니다.",
+  "항상 감사하다는 말씀을 꼭 드리고 싶었습니다.",
   "",
-  "앞으로도 오래 기억하겠습니다.",
-  "정말 감사합니다."
+  "그동안의 베품에 감사하고, 앞으로도 잊지않으며 살아가겠습니다.",
+  "",
+  "또, 생신 축하드립니다!",
+  "졸업식날 뵙겠습니다!"
 ];
 
 let index = 0;
@@ -116,18 +120,19 @@ function showNext() {
     setTimeout(() => {
       const sign = document.createElement("div");
       sign.className = "sign";
-      sign.innerText = "— 제자 ○○ 드림";
+      sign.innerText = "— 제자 이인후 드림";
       container.appendChild(sign);
     }, 1800);
   }
 }
 
-// 화면 어디든 터치/클릭 가능
+
 document.addEventListener("pointerdown", showNext);
 </script>
 
 </body>
 </html>
+
 
 
 
