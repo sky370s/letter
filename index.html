@@ -49,8 +49,8 @@
   }
 
   @keyframes breathe {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+    from { opacity: 0; }
+    to   { opacity: 1; }
   }
 
   .sign {
@@ -81,16 +81,11 @@ const lines = [
 ];
 
 let index = 0;
-let lastTouch = 0;
 
 const container = document.getElementById("container");
 const hint = document.getElementById("hint");
 
 function showNext() {
-  const now = Date.now();
-  if (now - lastTouch < 100) return; // ⏱ 1초 대기
-  lastTouch = now;
-
   if (index === 0) hint.style.display = "none";
   if (index >= lines.length) return;
 
@@ -110,18 +105,16 @@ function showNext() {
       sign.className = "sign";
       sign.innerText = "— 제자 ○○ 드림";
       container.appendChild(sign);
-    }, 2000);
+    }, 1800);
   }
 }
 
-// 📱 모바일 + PC 공통
+// ✅ 이거 하나면 끝 (모바일/PC 전부)
 document.addEventListener("pointerdown", showNext);
 </script>
 
 </body>
 </html>
-
-
 
 
 
