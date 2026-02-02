@@ -88,7 +88,7 @@ const hint = document.getElementById("hint");
 
 function showNext() {
   const now = Date.now();
-  if (now - lastTouch < 1000) return; // ⏱ 1초 대기
+  if (now - lastTouch < 100) return; // ⏱ 1초 대기
   lastTouch = now;
 
   if (index === 0) hint.style.display = "none";
@@ -120,6 +120,7 @@ document.addEventListener("pointerdown", showNext);
 
 </body>
 </html>
+
 
 
 
