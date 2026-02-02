@@ -24,6 +24,11 @@
     margin-bottom: 24px;
   }
 
+  #container {
+    position: relative;
+    z-index: 1;
+  }
+
   .line {
     opacity: 0;
     transform: translateY(12px);
@@ -42,7 +47,7 @@
     margin-top: 22px;
   }
 
-  /* 노이즈 오버레이 */
+  /* 노이즈 */
   .noise {
     position: fixed;
     inset: 0;
@@ -56,6 +61,7 @@
 </svg>");
     opacity: 0.04;
     animation: noiseMove 0.6s steps(2) infinite;
+    z-index: 2;
   }
 
   @keyframes noiseMove {
@@ -65,13 +71,23 @@
     75% { transform: translate(-1px, -1px); }
     100% { transform: translate(0, 0); }
   }
+
+  /* 🔥 화면 전체 클릭 레이어 */
+  #click-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 3;
+    background: transparent;
+  }
 </style>
 </head>
 
 <body>
-<div class="noise"></div>
 
-<div id="hint">화면 아무 데나 터치하면 시작돼</div>
+<div class="noise"></div>
+<div id="click-layer"></div>
+
+<div id="hint">화면 아무 데나 터치해</div>
 <div id="container"></div>
 
 <script>
@@ -94,6 +110,7 @@ const lines = [
 let index = -1;
 const container = document.getElementById("container");
 const hint = document.getElementById("hint");
+const clickLayer = document.getElementById("click-layer");
 
 function nextLine() {
   if (navigator.vibrate) navigator.vibrate(15);
@@ -118,13 +135,15 @@ function nextLine() {
   }
 }
 
-// PC + 모바일 전부 대응
-document.body.addEventListener("click", nextLine);
-document.body.addEventListener("touchstart", nextLine);
+// 🔥 여기 중요
+clickLayer.addEventListener("click", nextLine);
+clickLayer.addEventListener("touchstart", nextLine);
 </script>
 
 </body>
 </html>
+
+
 
 
 
