@@ -9,6 +9,7 @@
   body {
     margin: 0;
     background: #111;
+    /* 종이 느낌 배경 */
     background-image:
       repeating-linear-gradient(
         0deg,
@@ -39,11 +40,19 @@
     transition: opacity 0.8s ease, transform 0.8s ease;
   }
 
+  /* PC에서는 애니메이션 빠르게 */
+  @media (pointer: fine) {
+    .line {
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+  }
+
   .show {
     opacity: 1;
     transform: translateY(0);
   }
 
+  /* 호흡 효과 */
   .breath {
     animation: breathe 1.2s ease-out;
   }
@@ -53,6 +62,7 @@
     to   { opacity: 1; }
   }
 
+  /* 서명 */
   .sign {
     margin-top: 32px;
     font-size: 16px;
@@ -81,9 +91,11 @@ const lines = [
 ];
 
 let index = 0;
-
 const container = document.getElementById("container");
 const hint = document.getElementById("hint");
+
+// PC인지 확인
+const isPC = window.matchMedia("(pointer: fine)").matches;
 
 function showNext() {
   if (index === 0) hint.style.display = "none";
@@ -94,7 +106,8 @@ function showNext() {
   div.innerText = lines[index];
   container.appendChild(div);
 
-  const delay = index === lines.length - 1 ? 1500 : 50;
+  // 마지막 문장만 모바일에서 천천히
+  const delay = index === lines.length - 1 && !isPC ? 1500 : 50;
   setTimeout(() => div.classList.add("show"), delay);
 
   index++;
@@ -109,12 +122,13 @@ function showNext() {
   }
 }
 
-// ✅ 이거 하나면 끝 (모바일/PC 전부)
+// 화면 어디든 터치/클릭 가능
 document.addEventListener("pointerdown", showNext);
 </script>
 
 </body>
 </html>
+
 
 
 
