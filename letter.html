@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>편지</title>
+
+<style>
+  body {
+    background: #111;
+    color: #fff;
+    font-size: 20px;
+    line-height: 1.8;
+    padding: 24px;
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+  }
+  .line {
+    opacity: 0;
+    margin-bottom: 12px;
+    transition: opacity 1s;
+  }
+  .show {
+    opacity: 1;
+  }
+</style>
+</head>
+
+<body>
+<div id="container"></div>
+
+<script>
+const lines = [
+  "안녕.",
+  "이 편지는 조금 느리게 읽혔으면 해서.",
+  "한 문장씩 보여주기로 했어.",
+  "",
+  "요즘 네 생각을 자주 해.",
+  "고마운 마음이 많아.",
+  "",
+  "끝까지 읽어줘서 고마워."
+];
+
+const container = document.getElementById("container");
+
+lines.forEach((text, index) => {
+  const div = document.createElement("div");
+  div.className = "line";
+  div.innerText = text;
+  container.appendChild(div);
+
+  setTimeout(() => {
+    div.classList.add("show");
+  }, index * 1500);
+});
+</script>
+</body>
+</html>
