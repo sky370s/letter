@@ -9,7 +9,6 @@
   body {
     margin: 0;
     background: #111;
-    /* 📜 종이 느낌 배경 */
     background-image:
       repeating-linear-gradient(
         0deg,
@@ -18,7 +17,7 @@
         transparent 1px,
         transparent 3px
       );
-    color: #ffffff;
+    color: #fff;
     font-size: 20px;
     line-height: 1.9;
     padding: 28px;
@@ -41,22 +40,19 @@
   }
 
   .show {
-    opacity: 0.95;
+    opacity: 1;
     transform: translateY(0);
   }
 
-  /* ✨ 호흡 효과 */
   .breath {
     animation: breathe 1.2s ease-out;
   }
 
   @keyframes breathe {
-    0%   { opacity: 0; }
-    50%  { opacity: 1; }
-    100% { opacity: 0.95; }
+    0% { opacity: 0; }
+    100% { opacity: 1; }
   }
 
-  /* ✍️ 서명 */
   .sign {
     margin-top: 32px;
     font-size: 16px;
@@ -67,7 +63,7 @@
 
 <body>
 
-<div id="hint">화면을 터치하면 편지가 시작됩니다</div>
+<div id="hint">화면을 터치하면 시작됩니다</div>
 <div id="container"></div>
 
 <script>
@@ -78,62 +74,54 @@ const lines = [
   "진심으로 감사드립니다.",
   "",
   "선생님 덕분에",
-  "배우는 시간들이 의미 있게 느껴졌고,",
-  "많이 성장할 수 있었습니다.",
+  "많이 배우고 성장할 수 있었습니다.",
   "",
   "앞으로도 오래 기억하겠습니다.",
   "정말 감사합니다."
 ];
 
-let index = -1;
-let locked = false;
+let index = 0;
+let lastTouch = 0;
 
 const container = document.getElementById("container");
 const hint = document.getElementById("hint");
 
-function nextLine() {
-  if (locked) return;
-  locked = true;
+function showNext() {
+  const now = Date.now();
+  if (now - lastTouch < 1000) return; // ⏱ 1초 대기
+  lastTouch = now;
 
-  setTimeout(() => {
-    if (index === -1) {
-      hint.style.display = "none";
-      index = 0;
-    }
+  if (index === 0) hint.style.display = "none";
+  if (index >= lines.length) return;
 
-    if (index < lines.length) {
-      const div = document.createElement("div");
-      div.className = "line breath";
-      div.innerText = lines[index];
-      container.appendChild(div);
+  const div = document.createElement("div");
+  div.className = "line breath";
+  div.innerText = lines[index];
+  container.appendChild(div);
 
-      // ⏳ 마지막 문장만 느리게
-      const delay = index === lines.length - 1 ? 2000 : 50;
-      setTimeout(() => div.classList.add("show"), delay);
+  const delay = index === lines.length - 1 ? 1500 : 50;
+  setTimeout(() => div.classList.add("show"), delay);
 
-      index++;
+  index++;
 
-      // ✍️ 서명 추가
-      if (index === lines.length) {
-        setTimeout(() => {
-          const sign = document.createElement("div");
-          sign.className = "sign";
-          sign.innerText = "— 제자 ○○ 드림";
-          container.appendChild(sign);
-        }, 2500);
-      }
-    }
-
-    locked = false;
-  }, 300); // 터치 후 1초 대기
+  if (index === lines.length) {
+    setTimeout(() => {
+      const sign = document.createElement("div");
+      sign.className = "sign";
+      sign.innerText = "— 제자 ○○ 드림";
+      container.appendChild(sign);
+    }, 2000);
+  }
 }
 
-document.body.addEventListener("click", nextLine);
-document.body.addEventListener("touchstart", nextLine);
+// 📱 모바일 + PC 공통
+document.addEventListener("pointerdown", showNext);
 </script>
 
 </body>
 </html>
+
+
 
 
 
