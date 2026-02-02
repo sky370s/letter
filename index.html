@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>선생님께</title>
 
+
+<meta property="og:title" content="선생님께 보내는 감사 편지">
+
+
 <style>
   body {
     margin: 0;
@@ -18,8 +22,8 @@
         transparent 3px
       );
     color: #fff;
-    font-size: 20px;
-    line-height: 1.9;
+    font-size: 18px;
+    line-height: 1.8;
     padding: 28px;
     font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
     user-select: none;
@@ -39,7 +43,6 @@
     transition: opacity 0.8s ease, transform 0.8s ease;
   }
 
-  
   @media (pointer: fine) {
     .line {
       transition: opacity 0.3s ease, transform 0.3s ease;
@@ -51,7 +54,6 @@
     transform: translateY(0);
   }
 
-  
   .breath {
     animation: breathe 1.2s ease-out;
   }
@@ -61,7 +63,6 @@
     to   { opacity: 1; }
   }
 
-  
   .sign {
     margin-top: 32px;
     font-size: 16px;
@@ -98,7 +99,7 @@ let index = 0;
 const container = document.getElementById("container");
 const hint = document.getElementById("hint");
 
-// PC인지 확인
+
 const isPC = window.matchMedia("(pointer: fine)").matches;
 
 function showNext() {
@@ -110,7 +111,6 @@ function showNext() {
   div.innerText = lines[index];
   container.appendChild(div);
 
-  // 마지막 문장만 모바일에서 천천히
   const delay = index === lines.length - 1 && !isPC ? 1500 : 50;
   setTimeout(() => div.classList.add("show"), delay);
 
@@ -126,18 +126,11 @@ function showNext() {
   }
 }
 
-
 document.addEventListener("pointerdown", showNext);
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
 
 
 
